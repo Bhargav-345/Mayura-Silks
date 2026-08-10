@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --bg: #faf8f3;
+            --surface: #fff;
+            --surface2: #f5f1e8;
+            --border: #e8e0d0;
+            --accent: #b5451b;
+            --accent2: #d4622e;
+            --accent3: #8b3214;
+            --text: #1a1610;
+            --muted: #7a6e60;
+            --danger: #c0392b;
+            --success: #1e7d4b;
+            --gold: #c8922a;
+            --radius: 3px;
+            --shadow: 0 2px 12px rgba(26, 22, 16, .08);
+            --shadow-lg: 0 8px 32px rgba(26, 22, 16, .14);
+        }
+
+        .page {
+            display: none
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeUp .4s ease
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem
+        }
+
+        /* ── AUTH ── */
+        .auth-wrap {
+            min-height: calc(100vh - 100px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #faf8f3, #f0e8d8)
+        }
+
+        .auth-card {
+            width: 440px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden
+        }
+
+        .auth-banner {
+            background: var(--accent);
+            padding: 2rem;
+            text-align: center
+        }
+
+        .auth-banner-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: .3rem
+        }
+
+        .auth-banner-sub {
+            font-size: .62rem;
+            color: rgba(255, 255, 255, .7);
+            letter-spacing: .1em
+        }
+
+        .auth-body {
+            padding: 2rem
+        }
+
+        .tab-grp {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-bottom: 1.8rem
+        }
+
+        .tab {
+            padding: .65rem;
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: .68rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all .2s
+        }
+
+        .tab.active {
+            background: var(--accent);
+            color: #fff
+        }
+
+        .form-group {
+            margin-bottom: 1rem
+        }
+
+        label {
+            display: block;
+            font-size: .6rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: .35rem
+        }
+
+        input,
+        select {
+            width: 100%;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: .7rem .9rem;
+            color: var(--text);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: .78rem;
+            transition: border-color .2s, box-shadow .2s;
+            outline: none
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(181, 69, 27, .1)
+        }
+
+        input::placeholder {
+            color: #bbb
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .75rem
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: .9rem;
+            background: var(--accent);
+            border: none;
+            border-radius: var(--radius);
+            color: #fff;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: .72rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all .2s;
+            margin-top: .5rem
+        }
+
+        .btn-primary:hover {
+            background: var(--accent2);
+            box-shadow: 0 4px 15px rgba(181, 69, 27, .35)
+        }
+
+        .trust-row {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border)
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: .35rem;
+            font-size: .6rem;
+            color: var(--muted)
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ══ AUTH ══ -->
+    <div class="page active" id="page-auth">
+        <div class="auth-wrap">
+            <div class="auth-card">
+                <div class="auth-banner">
+                    <div class="auth-banner-title">Welcome to Mayura Silks</div>
+                    <div class="auth-banner-sub">// INDIA'S PREMIUM SHOPPING DESTINATION</div>
+                </div>
+                <div class="auth-body">
+                    <div class="tab-grp">
+                        <button class="tab active" onclick="switchTab('login',this)">Sign In</button>
+                        <button class="tab" onclick="switchTab('register',this)">Register</button>
+                    </div>
+                    <div id="loginForm">
+                        <div class="form-group"><label>Email / Mobile</label><input type="text" id="loginEmail"
+                                placeholder="you@email.com or 9876543210" /></div>
+                        <div class="form-group"><label>Password</label><input type="password" id="loginPwd"
+                                placeholder="••••••••" /></div>
+                        <button class="btn-primary" onclick="login()">Sign In →</button>
+                    </div>
+                    <div id="registerForm" style="display:none">
+                        <div class="form-row">
+                            <div class="form-group"><label>First Name</label><input type="text" id="regFirst"
+                                    placeholder="Rahul" />
+                            </div>
+                            <div class="form-group"><label>Last Name</label><input type="text" id="regLast"
+                                    placeholder="Sharma" />
+                            </div>
+                        </div>
+                        <div class="form-group"><label>Email</label><input type="email" id="regEmail"
+                                placeholder="rahul@email.com" /></div>
+                        <div class="form-group"><label>Mobile</label><input type="tel" id="regPhone"
+                                placeholder="+91 9876543210" />
+                        </div>
+                        <div class="form-group"><label>Password</label><input type="password" id="regPwd"
+                                placeholder="Min. 8 characters" /></div>
+                        <button class="btn-primary" onclick="register()">Create Account →</button>
+                    </div>
+                    <div class="trust-row">
+                        <div class="trust-item">🔒 SSL</div>
+                        <div class="trust-item">🛡️ PCI DSS</div>
+                        <div class="trust-item">✓ RBI Compliant</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tab, btn) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active')); btn.classList.add('active');
+            document.getElementById('loginForm').style.display = tab === 'login' ? 'block' : 'none';
+            document.getElementById('registerForm').style.display = tab === 'register' ? 'block' : 'none';
+        }
+
+        async function register() {
+            const firstName = document.getElementById('regFirst').value.trim();
+            const lastName = document.getElementById('regLast').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPwd').value;
+
+            if (!firstName || !email || !password) {
+                alert('Please fill in first name, email, and password.');
+                return;
+            }
+
+            try {
+                const res = await fetch('http://localhost:3000/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: `${firstName} ${lastName}`.trim(),
+                        email,
+                        password
+                    })
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    alert(data.error || 'Registration failed');
+                    return;
+                }
+
+                alert('Account created! Please sign in.');
+                document.querySelector('.tab').click(); // switch back to Sign In tab
+            } catch (err) {
+                console.error(err);
+                alert('Could not reach the server. Is the backend running?');
+            }
+        }
+
+        async function login() {
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPwd').value;
+
+            if (!email || !password) {
+                alert('Please enter your email and password.');
+                return;
+            }
+
+            try {
+                const res = await fetch('http://localhost:3000/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    alert(data.error || 'Login failed');
+                    return;
+                }
+
+                // Save token + user info so other pages know you're logged in
+                localStorage.setItem('scm_token', data.token);
+                localStorage.setItem('scm_user', JSON.stringify(data.user));
+
+                alert(`Welcome back, ${data.user.name}!`);
+                window.location.href = 'index.html'; // redirect to homepage after login
+            } catch (err) {
+                console.error(err);
+                alert('Could not reach the server. Is the backend running?');
+            }
+        }
+    </script>
+</body>
+
+</html>
