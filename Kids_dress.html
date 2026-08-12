@@ -12,13 +12,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+
 </head>
 
 <body>
     <header>
         <nav>
             <div id="title">
-                <button id="hamburger-btn" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
                 <img src="images/mayura_logo.png" alt="">
             </div>
             <div id="second_layer">
@@ -41,7 +41,8 @@
                 <ul class="main-menu">
                     <!-- New Arrivals -->
                     <li class="menu-item">
-                        <a href="new.html">New Arrivals <i class="fa-solid fa-chevron-down menu-arrow"></i></a>
+                        <a href="new.html" class="nextlinks">New Arrivals <i
+                                class="fa-solid fa-chevron-down menu-arrow"></i></a>
                         <div class="mega-menu1">
                             <div class="mega-menu-content">
                                 <div class="mega-column">
@@ -52,15 +53,6 @@
                                         <li><a href="#">Designer Sarees</a></li>
                                         <li><a href="#">Bridal Collection 2026</a></li>
                                         <li><a href="#">Festive Specials</a></li>
-                                    </ul>
-                                </div>
-                                <div class="mega-column">
-                                    <h4>Trending Now</h4>
-                                    <ul class="submenu-list">
-                                        <li><a href="#">Pastel Shades</a></li>
-                                        <li><a href="#">Floral Prints</a></li>
-                                        <li><a href="#">Minimalist Designs</a></li>
-                                        <li><a href="#">Handloom Special</a></li>
                                     </ul>
                                 </div>
                                 <div class="mega-column featured">
@@ -87,14 +79,6 @@
                                         <li><a href="#">Anarkali</a></li>
                                     </ul>
                                 </div>
-                                <div class="mega-column">
-                                    <h4>Western Wear</h4>
-                                    <ul class="submenu-list">
-                                        <li><a href="#">Dresses</a></li>
-                                        <li><a href="#">Tops & Tunics</a></li>
-                                        <li><a href="#">Skirts</a></li>
-                                    </ul>
-                                </div>
                                 <div class="mega-column featured">
                                     <img src="images/sareepose1.jpg" alt="Women Collection">
                                     <p>Exclusive Women's Collection</p>
@@ -115,54 +99,14 @@
                                         <li><a href="#">Kurta Sets</a></li>
                                         <li><a href="#">Sherwanis</a></li>
                                         <li><a href="#">Dhotis</a></li>
-                                        <li><a href="#">Nehru Jackets</a></li>
                                     </ul>
                                 </div>
                                 <div class="mega-column">
                                     <h4>Casual Wear</h4>
                                     <ul class="submenu-list">
                                         <li><a href="#">Shirts</a></li>
-                                        <li><a href="#">T-Shirts</a></li>
                                         <li><a href="#">Jeans & Trousers</a></li>
-                                        <li><a href="#">Shorts</a></li>
                                     </ul>
-                                </div>
-                                <div class="mega-column featured">
-                                    <img src="images/boy.avif" alt="Men Collection">
-                                    <p>Premium Men's Wear</p>
-                                    <a href="#" class="shop-btn">Explore →</a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <!-- Kids -->
-                    <li class="menu-item">
-                        <a href="Kids_dress.html">Kids <i class="fa-solid fa-chevron-down menu-arrow"></i></a>
-                        <div class="mega-menu2">
-                            <div class="mega-menu-content">
-                                <div class="mega-column">
-                                    <h4>Girls</h4>
-                                    <ul class="submenu-list">
-                                        <li><a href="#">Lehengas</a></li>
-                                        <li><a href="#">Frocks</a></li>
-                                        <li><a href="#">Ethnic Sets</a></li>
-                                        <li><a href="#">Dresses</a></li>
-                                    </ul>
-                                </div>
-                                <div class="mega-column">
-                                    <h4>Boys</h4>
-                                    <ul class="submenu-list">
-                                        <li><a href="#">Kurta Sets</a></li>
-                                        <li><a href="#">Shirts & Pants</a></li>
-                                        <li><a href="#">Ethnic Wear</a></li>
-                                        <li><a href="#">Casual Wear</a></li>
-                                    </ul>
-                                </div>
-                                <div class="mega-column featured">
-                                    <img src="images/kurti.jpg" alt="Kids Collection">
-                                    <p>Adorable Kids Wear</p>
-                                    <a href="#" class="shop-btn">Shop Kids →</a>
                                 </div>
                             </div>
                         </div>
@@ -233,8 +177,6 @@
                                     <ul class="submenu-list">
                                         <li><a href="#">Cotton Kurtas</a></li>
                                         <li><a href="#">Linen Kurtas</a></li>
-                                        <li><a href="#">Short Kurtis</a></li>
-                                        <li><a href="#">A-Line Kurtas</a></li>
                                     </ul>
                                 </div>
                                 <div class="mega-column featured">
@@ -247,216 +189,40 @@
                     </li>
                 </ul>
             </div>
-
         </nav>
     </header>
 
-    <main>
+    <main id="contents">
         <h1>Kids Dresses</h1>
         <section class="category">
-            <h3 class="category_name">Women</h3>
+            <h3 class="category_name">For girls</h3>
             <div class="category_scroll-section">
-                <button class="scroll-arrow left"><i class="fa-solid fa-chevron-left"></i></button>
-                <div class="category_cont">
-                    <div class="cards"><a href="images/sareesub2.webp" data-lightbox="sarees"
-                            data-title="Banarasi ₹15,000.00"><img src="images/newwomen1.webp" alt=""></a>
-                        <p>&#8377;15000.00 Banarasi</p>
-                        <div class="wish_buy_cont">
-                            <button class="wish" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-heart"></i></button>
-                            <button class="buy" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-cart-arrow-down"></i></button>
-                        </div>
-                    </div>
-                    <div class="cards"><a href="images/sareesub2.webp" data-lightbox="sarees"
-                            data-title="Banarasi ₹15,000.00"><img src="images/newwomen2.webp" alt=""></a>
-                        <p>&#8377;15000.00 Banarasi</p>
-                        <div class="wish_buy_cont">
-                            <button class="wish" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-heart"></i></button>
-                            <button class="buy" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-cart-arrow-down"></i></button>
-                        </div>
-                    </div>
-                    <div class="cards"><a href="images/sareesub2.webp" data-lightbox="sarees"
-                            data-title="Banarasi ₹15,000.00"><img src="images/newwoman3.webp" alt=""></a>
-                        <p>&#8377;15000.00 Banarasi</p>
-                        <div class="wish_buy_cont">
-                            <button class="wish" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-heart"></i></button>
-                            <button class="buy" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-cart-arrow-down"></i></button>
-                        </div>
-                    </div>
-                    <div class="cards"><a href="images/sareesub2.webp" data-lightbox="sarees"
-                            data-title="Banarasi ₹15,000.00"><img src="images/newwoman4.jpg" alt=""></a>
-                        <p>&#8377;15000.00 Banarasi</p>
-                        <div class="wish_buy_cont">
-                            <button class="wish" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-heart"></i></button>
-                            <button class="buy" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-cart-arrow-down"></i></button>
-                        </div>
-                    </div>
+                <button class="scroll-arrow left"><i class="fa-solid fa-chevron-left"></i> </button>
+                <div class="category_cont" id="new_arrival_girl-container">
+                    <!-- items required -->
                 </div>
                 <button class="scroll-arrow right"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
         </section>
         <section class="category">
-            <h3 class="category_name">Men</h3>
+            <h3 class="category_name">Formal Pant & Shirt for Boys</h3>
             <div class="category_scroll-section">
                 <button class="scroll-arrow left"><i class="fa-solid fa-chevron-left"></i></button>
-                <div class="category_cont">
-                    <div class="cards"><a href="images/sareesub2.webp" data-lightbox="sarees"
-                            data-title="Banarasi ₹15,000.00"><img src="images/newmen1.jpg" alt=""></a>
-                        <p>&#8377;15000.00 Banarasi</p>
-                        <div class="wish_buy_cont">
-                            <button class="wish" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-heart"></i></button>
-                            <button class="buy" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-cart-arrow-down"></i></button>
-                        </div>
-                    </div>
-                    <div class="cards"><a href="images/sareesub2.webp" data-lightbox="sarees"
-                            data-title="Banarasi ₹15,000.00"><img src="images/newman2.jpg" alt=""></a>
-                        <p>&#8377;15000.00 Banarasi</p>
-                        <div class="wish_buy_cont">
-                            <button class="wish" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-heart"></i></button>
-                            <button class="buy" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-cart-arrow-down"></i></button>
-                        </div>
-                    </div>
-                    <div class="cards"><a href="images/sareesub2.webp" data-lightbox="sarees"
-                            data-title="Banarasi ₹15,000.00"><img src="images/newman3.jpg" alt=""></a>
-                        <p>&#8377;15000.00 Banarasi</p>
-                        <div class="wish_buy_cont">
-                            <button class="wish" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-heart"></i></button>
-                            <button class="buy" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-cart-arrow-down"></i></button>
-                        </div>
-                    </div>
-                    <div class="cards"><a href="images/sareesub2.webp" data-lightbox="sarees"
-                            data-title="Banarasi ₹15,000.00"><img src="images/newman4.jpg" alt=""></a>
-                        <p>&#8377;15000.00 Banarasi</p>
-                        <div class="wish_buy_cont">
-                            <button class="wish" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-heart"></i></button>
-                            <button class="buy" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-cart-arrow-down"></i></button>
-                        </div>
-                    </div>
+                <div class="category_cont" id="new_arrival_boy-container">
+                    <!-- items required -->
                 </div>
                 <button class="scroll-arrow right"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
         </section>
         <section class="category">
-            <h3 class="category_name">Kids</h3>
-            <h4>Girls</h4>
+            <h3 class="category_name">For girls</h3>
             <div class="category_scroll-section">
                 <button class="scroll-arrow left"><i class="fa-solid fa-chevron-left"></i></button>
-                <div class="category_cont">
-                    <div class="cards">
-                        <a href="images/sareesub2.webp" data-lightbox="sarees" data-title="Banarasi ₹15,000.00"><img
-                                src="images/newman4.jpg" alt=""></a>
-                        <p>&#8377;15000.00 Banarasi</p>
-                        <div class="wish_buy_cont">
-                            <button class="wish" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-heart"></i></button>
-                            <button class="buy" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-cart-arrow-down"></i></button>
-                        </div>
-                    </div>
-                    <div class="cards">
-                        <a href="images/sareesub2.webp" data-lightbox="sarees" data-title="Banarasi ₹15,000.00"><img
-                                src="images/newman4.jpg" alt=""></a>
-                        <p>&#8377;15000.00 Banarasi</p>
-                        <div class="wish_buy_cont">
-                            <button class="wish" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-heart"></i></button>
-                            <button class="buy" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-cart-arrow-down"></i></button>
-                        </div>
-                    </div>
-                    <div class="cards">
-                        <a href="images/sareesub2.webp" data-lightbox="sarees" data-title="Banarasi ₹15,000.00"><img
-                                src="images/newman4.jpg" alt=""></a>
-                        <p>&#8377;15000.00 Banarasi</p>
-                        <div class="wish_buy_cont">
-                            <button class="wish" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-heart"></i></button>
-                            <button class="buy" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-cart-arrow-down"></i></button>
-                        </div>
-                    </div>
-                    <div class="cards">
-                        <a href="images/sareesub2.webp" data-lightbox="sarees" data-title="Banarasi ₹15,000.00"><img
-                                src="images/newman4.jpg" alt=""></a>
-                        <p>&#8377;15000.00 Banarasi</p>
-                        <div class="wish_buy_cont">
-                            <button class="wish" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-heart"></i></button>
-                            <button class="buy" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-cart-arrow-down"></i></button>
-                        </div>
-                    </div>
+                <div class="category_cont" id="Girls-container">
+                    <!-- items required -->
                 </div>
                 <button class="scroll-arrow right"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
-
-            <h4>Boys</h4>
-            <div class="category_scroll-section">
-                <button class="scroll-arrow left"><i class="fa-solid fa-chevron-left"></i></button>
-                <div class="category_cont">
-                    <div class="cards">
-                        <a href="images/sareesub2.webp" data-lightbox="sarees" data-title="Banarasi ₹15,000.00"><img
-                                src="images/newman4.jpg" alt=""></a>
-                        <p>&#8377;15000.00 Banarasi</p>
-                        <div class="wish_buy_cont">
-                            <button class="wish" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-heart"></i></button>
-                            <button class="buy" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-cart-arrow-down"></i></button>
-                        </div>
-                    </div>
-                    <div class="cards">
-                        <a href="images/sareesub2.webp" data-lightbox="sarees" data-title="Banarasi ₹15,000.00"><img
-                                src="images/newman4.jpg" alt=""></a>
-                        <p>&#8377;15000.00 Banarasi</p>
-                        <div class="wish_buy_cont">
-                            <button class="wish" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-heart"></i></button>
-                            <button class="buy" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-cart-arrow-down"></i></button>
-                        </div>
-                    </div>
-                    <div class="cards">
-                        <a href="images/sareesub2.webp" data-lightbox="sarees" data-title="Banarasi ₹15,000.00"><img
-                                src="images/newman4.jpg" alt=""></a>
-                        <p>&#8377;15000.00 Banarasi</p>
-                        <div class="wish_buy_cont">
-                            <button class="wish" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-heart"></i></button>
-                            <button class="buy" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-cart-arrow-down"></i></button>
-                        </div>
-                    </div>
-                    <div class="cards">
-                        <a href="images/sareesub2.webp" data-lightbox="sarees" data-title="Banarasi ₹15,000.00"><img
-                                src="images/newman4.jpg" alt=""></a>
-                        <p>&#8377;15000.00 Banarasi</p>
-                        <div class="wish_buy_cont">
-                            <button class="wish" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-heart"></i></button>
-                            <button class="buy" data-name="Patola" data-price="5000"
-                                data-image="images/sareesub4.avif"><i class="fa-solid fa-cart-arrow-down"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <button class="scroll-arrow right"><i class="fa-solid fa-chevron-right"></i></button>
-            </div>
-
         </section>
 
     </main>
@@ -524,51 +290,8 @@
             <p>© 2026 A&Z Market - A Unit Of A&Z Groups Private Limited. All rights reserved.</p>
         </div>
     </footer>
-
-    <script>
-
-        // MOBILE SIDEBAR MENU (hamburger in second_layer)
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const hamburgerBtn = document.querySelector('.hamburger');
-            const thirdLayer = document.getElementById('third_layer');
-            const backdrop = document.getElementById('menu-backdrop');
-            const hamburgerIcon = hamburgerBtn.querySelector('i');
-
-            function openMobileMenu() {
-                thirdLayer.classList.add('active');
-                backdrop.classList.add('active');
-                hamburgerIcon.classList.remove('fa-bars');
-                hamburgerIcon.classList.add('fa-xmark');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeMobileMenu() {
-                thirdLayer.classList.remove('active');
-                backdrop.classList.remove('active');
-                hamburgerIcon.classList.remove('fa-xmark');
-                hamburgerIcon.classList.add('fa-bars');
-                document.body.style.overflow = '';
-            }
-
-            hamburgerBtn.addEventListener('click', function () {
-
-                if (thirdLayer.classList.contains('active')) {
-                    closeMobileMenu();
-                } else {
-                    openMobileMenu();
-                }
-            });
-
-            backdrop.addEventListener('click', closeMobileMenu);
-
-            // Tapping a category link navigates to its page - just close the sidebar first
-            thirdLayer.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', closeMobileMenu);
-            });
-        });
-    </script>
-    <script src="script.js" defer></script>
 </body>
+<script src="script.js" defer></script>
+<script src="categories.js" defer></script>
 
 </html>

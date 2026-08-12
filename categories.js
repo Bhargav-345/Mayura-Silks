@@ -1,4 +1,47 @@
 //categories.js
+
+// MOBILE SIDEBAR MENU (hamburger in second_layer)
+
+document.addEventListener('DOMContentLoaded', function () {
+    const hamburgerBtn = document.querySelector('.hamburger');
+    const thirdLayer = document.getElementById('third_layer');
+    const backdrop = document.getElementById('menu-backdrop');
+    const hamburgerIcon = hamburgerBtn.querySelector('i');
+
+    function openMobileMenu() {
+        thirdLayer.classList.add('active');
+        backdrop.classList.add('active');
+        hamburgerIcon.classList.remove('fa-bars');
+        hamburgerIcon.classList.add('fa-xmark');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+        thirdLayer.classList.remove('active');
+        backdrop.classList.remove('active');
+        hamburgerIcon.classList.remove('fa-xmark');
+        hamburgerIcon.classList.add('fa-bars');
+        document.body.style.overflow = '';
+    }
+
+    hamburgerBtn.addEventListener('click', function () {
+
+        if (thirdLayer.classList.contains('active')) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
+    });
+
+    backdrop.addEventListener('click', closeMobileMenu);
+
+    // Tapping a category link navigates to its page - just close the sidebar first
+    thirdLayer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+});
+
+
 document.querySelectorAll('.category_scroll-section').forEach(section => {
     const container = section.querySelector('.category_cont');
     const leftBtn = section.querySelector('.scroll-arrow.left');
@@ -6,13 +49,10 @@ document.querySelectorAll('.category_scroll-section').forEach(section => {
 
     leftBtn.addEventListener('click', () => {
         container.scrollBy({ left: -100, behavior: 'smooth' });
-        console.log('leftBtn is clicked');
-
     });
 
     rightBtn.addEventListener('click', () => {
-        container.scrollBy({ left: 100, behavior: 'smooth' });
-        console.log('rightBtn is clicked');
+        container.scrollBy({ left: 100, behavior: 'smooth' }); `m `
     });
 });
 
@@ -57,8 +97,11 @@ loadProducts('new_arrival_women', 'new_arrival_women-container');
 loadProducts('new_arrival_men', 'new_arrival_men-container');
 loadProducts('new_arrival_girl', 'new_arrival_girl-container');
 loadProducts('new_arrival_boy', 'new_arrival_boy-container');
+loadProducts('sarees', 'sarees-container');
+loadProducts('Silk-sarees', 'Silks-container');
+loadProducts('Girls', 'Girls-container');
 
-document.getElementsById('contents').addEventListener('click', function (e) {
+document.getElementById('contents').addEventListener('click', function (e) {
     const btn = e.target.closest('button');
     if (!btn) return;
 

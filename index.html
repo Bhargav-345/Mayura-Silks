@@ -51,15 +51,6 @@
                                         <li><a href="#">Festive Specials</a></li>
                                     </ul>
                                 </div>
-                                <div class="mega-column">
-                                    <h4>Trending Now</h4>
-                                    <ul class="submenu-list">
-                                        <li><a href="#">Pastel Shades</a></li>
-                                        <li><a href="#">Floral Prints</a></li>
-                                        <li><a href="#">Minimalist Designs</a></li>
-                                        <li><a href="#">Handloom Special</a></li>
-                                    </ul>
-                                </div>
                                 <div class="mega-column featured">
                                     <img src="images/saree1.jpeg" alt="New Arrivals">
                                     <p>Shop the Latest Trends</p>
@@ -84,14 +75,6 @@
                                         <li><a href="#">Anarkali</a></li>
                                     </ul>
                                 </div>
-                                <div class="mega-column">
-                                    <h4>Western Wear</h4>
-                                    <ul class="submenu-list">
-                                        <li><a href="#">Dresses</a></li>
-                                        <li><a href="#">Tops & Tunics</a></li>
-                                        <li><a href="#">Skirts</a></li>
-                                    </ul>
-                                </div>
                                 <div class="mega-column featured">
                                     <img src="images/sareepose1.jpg" alt="Women Collection">
                                     <p>Exclusive Women's Collection</p>
@@ -112,22 +95,14 @@
                                         <li><a href="#">Kurta Sets</a></li>
                                         <li><a href="#">Sherwanis</a></li>
                                         <li><a href="#">Dhotis</a></li>
-                                        <li><a href="#">Nehru Jackets</a></li>
                                     </ul>
                                 </div>
                                 <div class="mega-column">
                                     <h4>Casual Wear</h4>
                                     <ul class="submenu-list">
                                         <li><a href="#">Shirts</a></li>
-                                        <li><a href="#">T-Shirts</a></li>
                                         <li><a href="#">Jeans & Trousers</a></li>
-                                        <li><a href="#">Shorts</a></li>
                                     </ul>
-                                </div>
-                                <div class="mega-column featured">
-                                    <img src="images/boy.avif" alt="Men Collection">
-                                    <p>Premium Men's Wear</p>
-                                    <a href="#" class="shop-btn">Explore →</a>
                                 </div>
                             </div>
                         </div>
@@ -142,7 +117,6 @@
                                     <h4>Girls</h4>
                                     <ul class="submenu-list">
                                         <li><a href="#">Lehengas</a></li>
-                                        <li><a href="#">Frocks</a></li>
                                         <li><a href="#">Ethnic Sets</a></li>
                                         <li><a href="#">Dresses</a></li>
                                     </ul>
@@ -230,8 +204,6 @@
                                     <ul class="submenu-list">
                                         <li><a href="#">Cotton Kurtas</a></li>
                                         <li><a href="#">Linen Kurtas</a></li>
-                                        <li><a href="#">Short Kurtis</a></li>
-                                        <li><a href="#">A-Line Kurtas</a></li>
                                     </ul>
                                 </div>
                                 <div class="mega-column featured">
@@ -424,77 +396,8 @@
             <p>© 2026 A&Z Market - A Unit Of A&Z Groups Private Limited. All rights reserved.</p>
         </div>
     </footer>
-
-    <script>
-
-        // MOBILE SIDEBAR MENU (hamburger in second_layer)
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const hamburgerBtn = document.querySelector('.hamburger');
-            const thirdLayer = document.getElementById('third_layer');
-            const backdrop = document.getElementById('menu-backdrop');
-            const hamburgerIcon = hamburgerBtn.querySelector('i');
-
-            function openMobileMenu() {
-                thirdLayer.classList.add('active');
-                backdrop.classList.add('active');
-                hamburgerIcon.classList.remove('fa-bars');
-                hamburgerIcon.classList.add('fa-xmark');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeMobileMenu() {
-                thirdLayer.classList.remove('active');
-                backdrop.classList.remove('active');
-                hamburgerIcon.classList.remove('fa-xmark');
-                hamburgerIcon.classList.add('fa-bars');
-                document.body.style.overflow = '';
-            }
-
-            hamburgerBtn.addEventListener('click', function () {
-
-                if (thirdLayer.classList.contains('active')) {
-                    closeMobileMenu();
-                } else {
-                    openMobileMenu();
-                }
-            });
-
-            backdrop.addEventListener('click', closeMobileMenu);
-
-            // Tapping a category link navigates to its page - just close the sidebar first
-            thirdLayer.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', closeMobileMenu);
-            });
-        });
-
-        let index = 0;
-        displayslide();
-        function displayslide() {
-            let i;
-            let slides = document.getElementsByClassName('myslides');
-            let dots = document.getElementsByClassName('dot');
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            index++;
-            if (index > slides.length) {
-                index = 1
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            slides[index - 1].style.display = "block";
-            dots[index - 1].className += " active";
-            setTimeout(displayslide, 2000); // Change image every 2 seconds
-        }
-
-    </script>
 </body>
-<!-- <script>
-    localStorage.removeItem('scm_cart');
-    localStorage.removeItem('scm_wish');
-</script> -->
+
 <script src="script.js" defer></script>
 
 </html>
