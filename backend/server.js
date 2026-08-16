@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
@@ -15,7 +16,8 @@ mongoose.connect('mongodb://localhost:27017/csmsilks')
     .then(() => console.log('Mongodb Connected'))
     .catch(err => console.log('MongoDB connection error:', err));
 
-const JWT_SECRET = 'replace_this_with_a_long_random_string_later';
+const JWT_SECRET = process.env.JWT_SECRET;
+mongoose.connect(process.env.MONGO_URI)
 
 app.get('/', (req, res) => {
     res.send('Backend running');
@@ -84,7 +86,7 @@ app.get('/api/products', async (req, res) => {
 
 // ── CART ──
 
-// GET current user's cart 
+// GET current user's cart
 app.get('/api/cart', verifyToken, async (req, res) => {
     try {
         const user = await User.findById(req.user.userId).populate('cart.product');
@@ -94,7 +96,7 @@ app.get('/api/cart', verifyToken, async (req, res) => {
     }
 });
 
-// ADD an item to cart 
+// ADD an item to cart
 app.post('/api/cart', verifyToken, async (req, res) => {
     try {
         const { productId, qty } = req.body;
@@ -136,7 +138,11 @@ app.put('/api/cart/:productId', verifyToken, async (req, res) => {
 // REMOVE an item from cart
 app.delete('/api/cart/:productId', verifyToken, async (req, res) => {
     try {
-        const user = await User.findByIdAndDelete(req.user.userId);
+        // FIXED: was findByIdAndDelete — that deleted the entire user account
+        // every time someone removed a single cart item. Should only fetch the user.
+        const user = await User.findById(req.user.userId);
+        if (!user) return res.status(404).json({ error: 'User not found' });
+
         user.cart = user.cart.filter(item => item.product.toString() !== req.params.productId);
         await user.save();
         res.json(user.cart);
@@ -179,6 +185,8 @@ app.post('/api/wishlist', verifyToken, async (req, res) => {
 app.delete('/api/wishlist/:productId', verifyToken, async (req, res) => {
     try {
         const user = await User.findById(req.user.userId);
+        if (!user) return res.status(404).json({ error: 'User not found' });
+
         user.wishlist = user.wishlist.filter(id => id.toString() !== req.params.productId);
         await user.save();
         res.json(user.wishlist);
@@ -187,8 +195,8 @@ app.delete('/api/wishlist/:productId', verifyToken, async (req, res) => {
     }
 });
 
-// GET a single product by ID
-app.get('/api/products/:id', verifyAdmin, async (req, res) => {
+// GET a single product by ID (public — anyone should be able to view a product's detail page)
+app.get('/api/products/:id', async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
         if (!product) {
@@ -200,7 +208,6 @@ app.get('/api/products/:id', verifyAdmin, async (req, res) => {
     }
 });
 
-// GET USERS INFO 
 // GET /details — View all registered users (passwords excluded)
 app.get('/details', verifyAdmin, async (req, res) => {
     try {
@@ -226,7 +233,7 @@ app.get('/details/:id', verifyAdmin, async (req, res) => {
     }
 });
 
-// DELETE /details/:id — Delete a user
+// DELETE /details/:id — Delete a user (this one is SUPPOSED to delete — admin-only user management)
 app.delete('/details/:id', verifyAdmin, async (req, res) => {
     try {
         const user = await User.findByIdAndDelete(req.params.id);
@@ -237,7 +244,6 @@ app.delete('/details/:id', verifyAdmin, async (req, res) => {
     }
 });
 
-
 // CREATE a new product
 app.post('/api/products', verifyAdmin, async (req, res) => {
     try {
@@ -245,8 +251,8 @@ app.post('/api/products', verifyAdmin, async (req, res) => {
         await newProduct.save();
         res.status(201).json(newProduct);
     } catch (err) {
-        console.log(err); // ADD THIS — shows the real error in your terminal
-        res.status(500).json({ error: err.message }); // shows real reason in Thunder Client too
+        console.log(err);
+        res.status(500).json({ error: err.message });
     }
 });
 
@@ -256,7 +262,7 @@ app.put('/api/products/:id', verifyAdmin, async (req, res) => {
         const updated = await Product.findByIdAndUpdate(
             req.params.id,
             req.body,
-            { returnDocument: 'after' } // updated from { new: true }
+            { returnDocument: 'after' }
         );
         res.json(updated);
     } catch (err) {
@@ -271,24 +277,6 @@ app.delete('/api/products/:id', verifyAdmin, async (req, res) => {
         res.json({ message: 'Product deleted' });
     } catch (err) {
         res.status(500).json({ error: 'Failed to delete product' });
-    }
-});
-
-// TEMPORARY — remove after use. Flips a user to admin for testing.
-app.post('/api/dev/make-admin', async (req, res) => {
-    try {
-        const { email } = req.body;
-        const user = await User.findOneAndUpdate(
-            { email },
-            { isAdmin: true },
-            { returnDocument: 'after' }
-        );
-        if (!user) {
-            return res.status(404).json({ error: 'User not found' });
-        }
-        res.json({ message: `${user.email} is now an admin`, user });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
     }
 });
 

@@ -1,4 +1,4 @@
-
+//script.js
 // MOBILE SIDEBAR MENU (hamburger in second_layer)
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -60,8 +60,6 @@ function displayslide() {
     dots[index - 1].className += " active";
     setTimeout(displayslide, 2000); // Change image every 2 seconds
 }
-
-
 
 // ── AUTH HELPERS ──
 function getToken() {
@@ -251,7 +249,7 @@ loadProducts('sarees', 'sarees-container');
 loadProducts('Silk-sarees', 'Silks-container');
 loadProducts('Girls', 'Girls-container');
 loadProducts('Boys', 'Boys-container');
-loadProducts('Kurtas', 'Kurtas-container');
+loadProducts('Kurtis', 'Kurtis-container');
 
 // ── CLICK HANDLER (now reads data-id, calls API functions) ──
 const content2 = document.getElementById('content2');

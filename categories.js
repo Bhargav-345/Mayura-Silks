@@ -41,6 +41,31 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// ── NAVBAR AUTH STATE ──
+function updateNavbarAuth() {
+    const authLink = document.querySelector('a[href="auth.html"]');
+    if (!authLink) return;
+
+    const user = JSON.parse(localStorage.getItem('scm_user'));
+
+    if (user) {
+        authLink.innerHTML = `<i class="fa-regular fa-circle-user"></i>${user.name}`;
+        authLink.href = '#';
+        authLink.onclick = (e) => {
+            e.preventDefault();
+            if (confirm('Log out?')) {
+                localStorage.removeItem('scm_token');
+                localStorage.removeItem('scm_user');
+                window.location.href = 'index.html';
+            }
+        };
+    } else {
+        authLink.innerHTML = `<i class="fa-regular fa-circle-user"></i>Login | Sign Up`;
+        authLink.href = 'auth.html';
+    }
+}
+
+updateNavbarAuth();
 
 document.querySelectorAll('.category_scroll-section').forEach(section => {
     const container = section.querySelector('.category_cont');
@@ -100,27 +125,27 @@ loadProducts('new_arrival_boy', 'new_arrival_boy-container');
 loadProducts('sarees', 'sarees-container');
 loadProducts('Silk-sarees', 'Silks-container');
 loadProducts('Girls', 'Girls-container');
+loadProducts('Kurtis', 'Kurtis-container');
 
-document.getElementById('contents').addEventListener('click', function (e) {
-    const btn = e.target.closest('button');
-    if (!btn) return;
+const contents = document.getElementById('contents');
+if (contents) {
+    contents.addEventListener('click', function (e) {
+        const btn = e.target.closest('button');
+        if (!btn) return;
 
-    const product = {
-        name: btn.getAttribute('data-name'),
-        price: parseFloat(btn.getAttribute('data-price')),
-        image: btn.getAttribute('data-image')
-    };
+        const productId = btn.getAttribute('data-id');
+        const name = btn.getAttribute('data-name');
 
-    if (btn.classList.contains('buy')) {
-        addToCart(product);
-        alert(product.name + ' added to cart! (' + cart.length + ' items)');
-    }
+        if (btn.classList.contains('buy')) {
+            addToCart(productId, name);
+        }
 
-    if (btn.classList.contains('wish')) {
-        addToWish(product);
-        alert(product.name + ' added to wishlist (' + wish.length + ' items)');
-    }
-});
+        if (btn.classList.contains('wish')) {
+            addToWish(productId, name);
+        }
+
+    });
+}
 
 // hamburger
 document.addEventListener('DOMContentLoaded', function () {
