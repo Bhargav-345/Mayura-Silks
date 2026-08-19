@@ -5,6 +5,10 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('./models/User');
 const Product = require('./models/Product');
+const Order = require('./models/Order');
+const Razorpay = require('razorpay');
+const crypto = require('crypto');
+
 const app = express();
 const port = 3000;
 const cors = require('cors');
@@ -12,12 +16,17 @@ app.use(cors());
 app.use(express.json());
 const { verifyToken, verifyAdmin } = require('./authMiddleware');
 
-mongoose.connect('mongodb://localhost:27017/csmsilks')
+
+const razorpay = new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET
+});
+
+mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('Mongodb Connected'))
     .catch(err => console.log('MongoDB connection error:', err));
 
 const JWT_SECRET = process.env.JWT_SECRET;
-mongoose.connect(process.env.MONGO_URI)
 
 app.get('/', (req, res) => {
     res.send('Backend running');
@@ -195,6 +204,125 @@ app.delete('/api/wishlist/:productId', verifyToken, async (req, res) => {
     }
 });
 
+// ── ORDERS ──
+// STEP 1 of payment: create a Razorpay order for the current cart total
+app.post('/api/payment/create-order', verifyToken, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.userId).populate('cart.product');
+        if (!user.cart || user.cart.length === 0) {
+            return res.status(400).json({ error: 'Cart is empty' });
+        }
+
+        const totalAmount = user.cart
+            .filter(item => item.product)
+            .reduce((sum, item) => sum + item.product.price * item.qty, 0);
+
+        const razorpayOrder = await razorpay.orders.create({
+            amount: Math.round(totalAmount * 100), // Razorpay uses paise, not rupees
+            currency: 'INR',
+            receipt: `receipt_${Date.now()}`
+        });
+
+        res.json({
+            razorpayOrderId: razorpayOrder.id,
+            amount: razorpayOrder.amount,
+            currency: razorpayOrder.currency,
+            keyId: process.env.RAZORPAY_KEY_ID // public key, safe to send to frontend
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// STEP 2 of payment: verify the payment actually succeeded, THEN create the real order
+app.post('/api/payment/verify', verifyToken, async (req, res) => {
+    try {
+        const {
+            razorpay_order_id,
+            razorpay_payment_id,
+            razorpay_signature,
+            shippingAddress
+        } = req.body;
+
+        // Recreate the signature ourselves and compare — this is what proves
+        // the payment response genuinely came from Razorpay, not a faked request.
+        const expectedSignature = crypto
+            .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
+            .update(`${razorpay_order_id}|${razorpay_payment_id}`)
+            .digest('hex');
+
+        if (expectedSignature !== razorpay_signature) {
+            return res.status(400).json({ error: 'Payment verification failed' });
+        }
+
+        // Payment is genuine — now actually create the order, same logic as before
+        if (!shippingAddress || !shippingAddress.fullName || !shippingAddress.phone ||
+            !shippingAddress.addressLine || !shippingAddress.city ||
+            !shippingAddress.state || !shippingAddress.pincode) {
+            return res.status(400).json({ error: 'Complete shipping address is required' });
+        }
+
+        const user = await User.findById(req.user.userId).populate('cart.product');
+        const items = user.cart
+            .filter(item => item.product)
+            .map(item => ({
+                product: item.product._id,
+                name: item.product.name,
+                price: item.product.price,
+                qty: item.qty
+            }));
+
+        const totalAmount = items.reduce((sum, item) => sum + item.price * item.qty, 0);
+        const expectedDelivery = new Date();
+        expectedDelivery.setDate(expectedDelivery.getDate() + 5);
+
+        const order = new Order({
+            user: user._id,
+            items,
+            totalAmount,
+            shippingAddress,
+            expectedDelivery,
+            status: 'confirmed' // payment succeeded, so skip 'pending'
+        });
+        await order.save();
+
+        user.cart = [];
+        await user.save();
+
+        res.status(201).json(order);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// GET the logged-in user's own order history
+app.get('/api/orders', verifyToken, async (req, res) => {
+    try {
+        const orders = await Order.find({ user: req.user.userId }).sort({ createdAt: -1 });
+        res.json(orders);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// GET a single order by ID (only if it belongs to the logged-in user)
+app.get('/api/orders/:id', verifyToken, async (req, res) => {
+    try {
+        const order = await Order.findById(req.params.id);
+        if (!order) return res.status(404).json({ error: 'Order not found' });
+
+        if (order.user.toString() !== req.user.userId.toString()) {
+            return res.status(403).json({ error: 'Not your order' });
+        }
+
+        res.json(order);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 // GET a single product by ID (public — anyone should be able to view a product's detail page)
 app.get('/api/products/:id', async (req, res) => {
     try {
@@ -277,6 +405,24 @@ app.delete('/api/products/:id', verifyAdmin, async (req, res) => {
         res.json({ message: 'Product deleted' });
     } catch (err) {
         res.status(500).json({ error: 'Failed to delete product' });
+    }
+});
+
+// TEMPORARY — remove after use. Flips a user to admin for testing.
+app.post('/api/dev/make-admin', async (req, res) => {
+    try {
+        const { email } = req.body;
+        const user = await User.findOneAndUpdate(
+            { email },
+            { isAdmin: true },
+            { returnDocument: 'after' }
+        );
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        res.json({ message: `${user.email} is now an admin`, user });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
 });
 

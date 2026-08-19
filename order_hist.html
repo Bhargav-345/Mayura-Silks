@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="script.js" defer></script>
+    <script src="order_hist.js" defer></script>
+    <style>
+        #orders-wrap {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        #orders-wrap h1 {
+            margin-bottom: 1.5rem;
+        }
+
+        .order-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 1.2rem;
+            overflow: hidden;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.2rem;
+            background: #f5f1e8;
+            border-bottom: 1px solid #eee;
+            font-size: 0.85rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .order-header .order-id {
+            color: #7a6e60;
+            font-family: monospace;
+        }
+
+        .order-status {
+            padding: 0.25rem 0.7rem;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #8a6d00;
+        }
+
+        .status-confirmed {
+            background: #d4edda;
+            color: #1e7d4b;
+        }
+
+        .status-shipped {
+            background: #cfe2ff;
+            color: #0a4fa0;
+        }
+
+        .status-delivered {
+            background: #d1e7dd;
+            color: #146c43;
+        }
+
+        .status-cancelled {
+            background: #f8d7da;
+            color: #a91c1c;
+        }
+
+        .order-items {
+            padding: 1rem 1.2rem;
+        }
+
+        .order-item-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.35rem 0;
+            font-size: 0.9rem;
+        }
+
+        .order-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.9rem 1.2rem;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+        }
+
+        .order-total {
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        .order-delivery {
+            color: #1e7d4b;
+            font-size: 0.85rem;
+        }
+
+        .order-address {
+            padding: 0 1.2rem 1rem;
+            font-size: 0.82rem;
+            color: #7a6e60;
+        }
+
+        #no-orders {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #7a6e60;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div id="title">
+                <img src="images/mayura_logo.png" alt="">
+            </div>
+            <div id="second_layer">
+                <ul id="ul1">
+                    <li class="lists"><a href="wishlist.html"><i class="fa-regular fa-heart"></i>Wishlist<span
+                                id="wish-count">0</span></a></li>
+                    <li class="lists"><a href="index.html"><i class="fa-solid fa-house"></i>Home</a></li>
+                    <li class="lists" id="li2"><a href="auth.html"><i class="fa-regular fa-circle-user"></i>Login | Sign
+                            Up</a></li>
+                    <li class="lists"><a href="cart.html"><i class="fa-solid fa-dolly"></i>Cart <span
+                                id="cart-count">0</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div id="orders-wrap">
+            <h1>My Orders</h1>
+            <div id="orders-list">
+                <!-- filled by orders.js -->
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

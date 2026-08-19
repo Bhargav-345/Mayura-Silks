@@ -151,4 +151,16 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
 
     calculateTotal();
+
+    //order now code
+    const placeOrderBtn = document.getElementById('place_order');
+    if (placeOrderBtn) {
+        placeOrderBtn.addEventListener('click', function () {
+            if (cartItems.length === 0) {
+                alert('Your cart is empty.');
+                return;
+            }
+            window.location.href = 'checkout.html';
+        });
+    }
 });

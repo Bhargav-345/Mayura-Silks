@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="script.js" defer></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="checkout.js" defer></script>
+    <style>
+        #checkout-wrap {
+            max-width: 700px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        #checkout-wrap h2 {
+            margin-bottom: 1rem;
+        }
+
+        .checkout-form {
+            background: #fff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 1.5rem;
+        }
+
+        .checkout-form label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            margin-top: 0.9rem;
+        }
+
+        .checkout-form input {
+            width: 100%;
+            padding: 0.6rem 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .checkout-form .row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        #delivery-estimate {
+            background: #eafaf0;
+            border: 1px solid #b7e4c7;
+            border-radius: 6px;
+            padding: 0.9rem 1rem;
+            margin: 1.2rem 0;
+            font-size: 0.9rem;
+            color: #1e7d4b;
+        }
+
+        #order-summary {
+            background: #fff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 1.5rem;
+        }
+
+        #order-summary .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.4rem 0;
+            font-size: 0.9rem;
+        }
+
+        #order-summary .summary-total {
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-top: 1px solid #eee;
+            margin-top: 0.5rem;
+            padding-top: 0.7rem;
+        }
+
+        #pay-now-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #9acd32;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        #pay-now-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div id="title">
+                <img src="images/mayura_logo.png" alt="">
+            </div>
+            <div id="second_layer">
+                <ul id="ul1">
+                    <li class="lists"><a href="wishlist.html"><i class="fa-regular fa-heart"></i>Wishlist<span
+                                id="wish-count">0</span></a></li>
+                    <li class="lists"><a href="index.html"><i class="fa-solid fa-house"></i>Home</a></li>
+                    <li class="lists" id="li2"><a href="auth.html"><i class="fa-regular fa-circle-user"></i>Login | Sign
+                            Up</a></li>
+                    <li class="lists"><a href="cart.html"><i class="fa-solid fa-dolly"></i>Cart <span
+                                id="cart-count">0</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div id="checkout-wrap">
+            <h2>Delivery Details</h2>
+
+            <div class="checkout-form">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" placeholder="Rahul Sharma" />
+
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" placeholder="9876543210" />
+
+                <label for="addressLine">Address</label>
+                <input type="text" id="addressLine" placeholder="House no, Street, Area" />
+
+                <div class="row-2">
+                    <div>
+                        <label for="city">City</label>
+                        <input type="text" id="city" placeholder="Mysuru" />
+                    </div>
+                    <div>
+                        <label for="state">State</label>
+                        <input type="text" id="state" placeholder="Karnataka" />
+                    </div>
+                </div>
+
+                <label for="pincode">Pincode</label>
+                <input type="text" id="pincode" placeholder="570001" />
+
+                <div id="delivery-estimate">
+                    📦 Estimated delivery: <strong id="delivery-date">calculating...</strong>
+                </div>
+            </div>
+
+            <div id="order-summary">
+                <h3>Order Summary</h3>
+                <div id="summary-items"><!-- filled by checkout.js --></div>
+                <div class="summary-row summary-total">
+                    <span>Total</span>
+                    <span id="summary-total">₹0</span>
+                </div>
+            </div>
+
+            <button id="pay-now-btn">Pay Now →</button>
+        </div>
+    </main>
+</body>
+
+</html>

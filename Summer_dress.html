@@ -190,7 +190,7 @@
         </nav>
     </header>
 
-    <main>
+    <main id="contents">
         <h1>Summer collections</h1>
         <section class="category">
             <h3 class="category_name">Banarasi</h3>
@@ -289,49 +289,7 @@
         </div>
     </footer>
 </body>
-<script>
-    // MOBILE SIDEBAR MENU (hamburger in second_layer)
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const hamburgerBtn = document.querySelector('.hamburger');
-        const thirdLayer = document.getElementById('third_layer');
-        const backdrop = document.getElementById('menu-backdrop');
-        const hamburgerIcon = hamburgerBtn.querySelector('i');
-
-        function openMobileMenu() {
-            thirdLayer.classList.add('active');
-            backdrop.classList.add('active');
-            hamburgerIcon.classList.remove('fa-bars');
-            hamburgerIcon.classList.add('fa-xmark');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeMobileMenu() {
-            thirdLayer.classList.remove('active');
-            backdrop.classList.remove('active');
-            hamburgerIcon.classList.remove('fa-xmark');
-            hamburgerIcon.classList.add('fa-bars');
-            document.body.style.overflow = '';
-        }
-
-        hamburgerBtn.addEventListener('click', function () {
-
-            if (thirdLayer.classList.contains('active')) {
-                closeMobileMenu();
-            } else {
-                openMobileMenu();
-            }
-        });
-
-        backdrop.addEventListener('click', closeMobileMenu);
-
-        // Tapping a category link navigates to its page - just close the sidebar first
-        thirdLayer.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', closeMobileMenu);
-        });
-    });
-
-</script>
 <script src="script.js" defer></script>
 <script src="categories.js" defer></script>
 

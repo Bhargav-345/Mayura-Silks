@@ -1,7 +1,8 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 const Product = require('./models/Product');
 
-mongoose.connect('mongodb://localhost:27017/csmsilks')
+mongoose.connect(process.env.MONGO_URI)
     .then(async () => {
         console.log('MongoDB connected for seeding');
 
