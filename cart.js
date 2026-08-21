@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     let cartItems = [];
 
     try {
-        const res = await fetch('http://csm-silks.onrender.com/api/cart', {
+        const res = await fetch('https://csm-silks.onrender.com/api/cart', {
             headers: { Authorization: `Bearer ${token}` }
         });
 
