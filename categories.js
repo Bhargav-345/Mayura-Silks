@@ -87,7 +87,7 @@ async function loadProducts(category, containerId) {
     if (!container) return;
 
     try {
-        const res = await fetch(`http://localhost:3000/api/products?category=${category}`);
+        const res = await fetch(`https://csm-silks.onrender.com/api/products?category=${category}`);
         const products = await res.json();
 
         if (!Array.isArray(products) || products.length === 0) {

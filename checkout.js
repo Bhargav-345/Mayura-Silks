@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Load the current cart to show a summary (order is created only after payment succeeds)
     let cartItems = [];
     try {
-        const res = await fetch('http://localhost:3000/api/cart', {
+        const res = await fetch('https://csm-silks.onrender.com/api/cart', {
             headers: { Authorization: `Bearer ${token}` }
         });
         if (!res.ok) throw new Error('Could not load cart');
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         try {
             // STEP 1: ask backend to create a Razorpay order for the cart total
-            const createRes = await fetch('http://localhost:3000/api/payment/create-order', {
+            const createRes = await fetch('https://csm-silks.onrender.com/api/payment/create-order', {
                 method: 'POST',
                 headers: { Authorization: `Bearer ${token}` }
             });
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     payBtn.textContent = 'Verifying payment...';
 
                     try {
-                        const verifyRes = await fetch('http://localhost:3000/api/payment/verify', {
+                        const verifyRes = await fetch('https://csm-silks.onrender.com/api/payment/verify', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',

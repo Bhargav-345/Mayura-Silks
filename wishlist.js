@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     let wishlist = [];
     try {
-        const res = await fetch('http://localhost:3000/api/wishlist', {
+        const res = await fetch('https://csm-silks.onrender.com/api/wishlist', {
             headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         removebtn.innerHTML = '<i class="fa-solid fa-trash"></i> Remove';
 
         removebtn.addEventListener('click', async function () {
-            const res = await fetch(`http://localhost:3000/api/wishlist/${item._id}`, {
+            const res = await fetch(`https://csm-silks.onrender.com/api/wishlist/${item._id}`, {
                 method: 'DELETE',
                 headers: { Authorization: `Bearer ${token}` }
             });

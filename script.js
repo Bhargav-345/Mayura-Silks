@@ -88,7 +88,7 @@ async function updateCartCount() {
     }
 
     try {
-        const res = await fetch('http://localhost:3000/api/cart', {
+        const res = await fetch('https://csm-silks.onrender.com/api/cart', {
             headers: { Authorization: `Bearer ${token}` }
         });
         if (!res.ok) { countElement.textContent = 0; return; }
@@ -112,7 +112,7 @@ async function updatewishcount() {
     }
 
     try {
-        const res = await fetch('http://localhost:3000/api/wishlist', {
+        const res = await fetch('https://csm-silks.onrender.com/api/wishlist', {
             headers: { Authorization: `Bearer ${token}` }
         });
         if (!res.ok) { countElement.textContent = 0; return; }
@@ -128,7 +128,7 @@ async function addToCart(productId, name) {
     if (!requireLogin()) return;
 
     try {
-        const res = await fetch('http://localhost:3000/api/cart', {
+        const res = await fetch('https://csm-silks.onrender.com/api/cart', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -156,7 +156,7 @@ async function addToWish(productId, name) {
     if (!requireLogin()) return;
 
     try {
-        const res = await fetch('http://localhost:3000/api/wishlist', {
+        const res = await fetch('https://csm-silks.onrender.com/api/wishlist', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -214,7 +214,7 @@ async function loadProducts(category, containerId) {
     if (!container) return;
 
     try {
-        const res = await fetch(`http://localhost:3000/api/products?category=${category}`);
+        const res = await fetch(`https://csm-silks.onrender.com/api/products?category=${category}`);
         const products = await res.json();
 
         if (!Array.isArray(products) || products.length === 0) {

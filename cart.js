@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     let cartItems = [];
 
     try {
-        const res = await fetch('http://localhost:3000/api/cart', {
+        const res = await fetch('http://csm-silks.onrender.com/api/cart', {
             headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     async function updateQtyOnServer(productId, qty) {
-        const res = await fetch(`http://localhost:3000/api/cart/${productId}`, {
+        const res = await fetch(`https://csm-silks.onrender.com/api/cart/${productId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
             body: JSON.stringify({ qty })
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     async function removeFromServer(productId) {
-        const res = await fetch(`http://localhost:3000/api/cart/${productId}`, {
+        const res = await fetch(`https://csm-silks.onrender.com/api/cart/${productId}`, {
             method: 'DELETE',
             headers: { Authorization: `Bearer ${token}` }
         });
