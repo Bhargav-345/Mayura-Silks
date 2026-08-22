@@ -76,7 +76,7 @@ function requireLogin() {
     return true;
 }
 
-// ── CART COUNT (fetched from API, not localStorage) ──
+// ── CART COUNT (fetched from API) ──
 async function updateCartCount() {
     const countElement = document.getElementById('cart-count');
     if (!countElement) return;
@@ -123,7 +123,7 @@ async function updatewishcount() {
     }
 }
 
-// ── ADD TO CART (calls API, not localStorage) ──
+// ── ADD TO CART (calls API) ──
 async function addToCart(productId, name) {
     if (!requireLogin()) return;
 
@@ -151,7 +151,7 @@ async function addToCart(productId, name) {
     }
 }
 
-// ── ADD TO WISHLIST (calls API, not localStorage) ──
+// ── ADD TO WISHLIST (calls API) ──
 async function addToWish(productId, name) {
     if (!requireLogin()) return;
 

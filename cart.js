@@ -164,3 +164,28 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
     }
 });
+
+// ── WISHLIST COUNT ──
+async function updatewishcount() {
+    const countElement = document.getElementById('wish-count');
+    if (!countElement) return;
+
+    const token = getToken();
+    if (!token) {
+        countElement.textContent = 0;
+        return;
+    }
+
+    try {
+        const res = await fetch('https://csm-silks.onrender.com/api/wishlist', {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        if (!res.ok) { countElement.textContent = 0; return; }
+        const wishlist = await res.json();
+        countElement.textContent = wishlist.length;
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+updatewishcount();
