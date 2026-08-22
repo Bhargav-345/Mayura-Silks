@@ -95,3 +95,28 @@ document.addEventListener('DOMContentLoaded', async function () {
         cards_cont.appendChild(cards); // FIXED: was "card" (undefined), now correctly "cards"
     });
 });
+
+// ── CART COUNT (fetched from API) ──
+async function updateCartCount() {
+    const countElement = document.getElementById('cart-count');
+    if (!countElement) return;
+
+    const token = getToken();
+    if (!token) {
+        countElement.textContent = 0;
+        return;
+    }
+
+    try {
+        const res = await fetch('https://csm-silks.onrender.com/api/cart', {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        if (!res.ok) { countElement.textContent = 0; return; }
+        const cart = await res.json();
+        const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+        countElement.textContent = totalQty;
+    } catch (err) {
+        console.error(err);
+    }
+}
+updateCartCount();
